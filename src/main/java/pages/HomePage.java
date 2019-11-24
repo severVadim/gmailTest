@@ -3,19 +3,24 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
-        super(driver);
+        BasePage.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     private String emailXpath = "//span[@data-hovercard-id='%s']/ancestor::td";
 
-    By newMail = By.xpath("//div[@role='button' and text()='Написать']");
+    @FindBy(xpath = "//div[@role='button' and text()='Написать']")
+    WebElement newMail;
 
-    By deleteButton = By.xpath("//div[@role='button' and @aria-label='Удалить']");
+    @FindBy(xpath = "//div[@role='button' and @aria-label='Удалить']")
+    WebElement deleteButton;
 
     public MailPage openEmail(String emailFrom) {
         click(getEmailRow(emailFrom));

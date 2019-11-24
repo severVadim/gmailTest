@@ -1,15 +1,20 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class MailPage extends BasePage {
+
     public MailPage(WebDriver driver) {
-        super(driver);
+        BasePage.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    By inboxPage = By.xpath("//a[@title='Входящие']");
+    @FindBy(xpath = "//a[@title='Входящие']")
+    WebElement inboxPage;
 
     public HomePage backToHomePage() {
         click(inboxPage);
