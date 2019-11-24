@@ -2,19 +2,26 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
-        super(driver);
+        BasePage.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    By emailOrPhone = By.xpath("//input[@aria-label='Телефон или адрес эл. почты']");
+    @FindBy(xpath = "//input[@aria-label='Телефон или адрес эл. почты']")
+    WebElement emailOrPhone;
 
-    By password = By.xpath("//input[@aria-label='Введите пароль']");
+    @FindBy(xpath = "//input[@aria-label='Введите пароль']")
+    WebElement password;
 
-    By nextButton = By.xpath("//span[text()='Далее']/ancestor::div[@role='button']");
+    @FindBy(xpath = "//span[text()='Далее']/ancestor::div[@role='button']")
+    WebElement nextButton;
 
     public HomePage loginIntoGmail(String userName, String userPassword) {
         writeText(emailOrPhone, userName);

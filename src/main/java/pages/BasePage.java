@@ -14,13 +14,8 @@ import java.util.List;
 
 public class BasePage {
 
-    protected WebDriver driver;
+    protected static WebDriver driver = null;
     private final int WAIT_TIME = 10;
-
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-    }
-
 
     public WebElement waitVisibility(By locator, int time) {
         WebDriverWait wait = new WebDriverWait(driver, time);
@@ -30,6 +25,11 @@ public class BasePage {
     public WebElement waitVisibility(By locator) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitVisibility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitToBeClickable(WebElement element) {
@@ -47,23 +47,14 @@ public class BasePage {
         element.click();
     }
 
-    public void click(By locator){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        waitToBeClickable(locator).click();
-    }
-
     public void rightClick(By locator) {
         waitToBeClickable(locator);
         Actions actions = new Actions(driver);
         actions.contextClick(driver.findElement(locator)).perform();
     }
 
-    public void writeText(By locator, String text) {
-        WebElement element = waitVisibility(locator);
+    public void writeText(WebElement element, String text) {
+        waitVisibility(element);
         element.clear();
         element.sendKeys(text);
     }

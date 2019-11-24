@@ -2,23 +2,30 @@ package pages;
 
 
 import objects.Mail;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class NewEmailPage extends BasePage {
 
     public NewEmailPage(WebDriver driver) {
-        super(driver);
+        BasePage.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    By toWhom = By.xpath("//textarea[@aria-label='Кому']");
+    @FindBy(xpath = "//textarea[@aria-label='Кому']")
+    WebElement toWhom;
 
-    By subject = By.xpath("//input[@aria-label='Тема']");
+    @FindBy(xpath = "//input[@aria-label='Тема']")
+    WebElement subject;
 
-    By message = By.xpath("//div[@role='textbox' and @aria-label='Тело письма']");
+    @FindBy(xpath = "//div[@role='textbox' and @aria-label='Тело письма']")
+    WebElement message;
 
-    By sendButton = By.xpath("//div[@role='button' and starts-with(@aria-label, 'Отправить')]");
+    @FindBy(xpath = "//div[@role='button' and starts-with(@aria-label, 'Отправить')]")
+    WebElement sendButton;
 
     public HomePage createNewMail(Mail mail) {
         writeText(toWhom, mail.getToWhom());
