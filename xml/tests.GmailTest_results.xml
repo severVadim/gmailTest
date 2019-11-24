@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gmailTest"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="17,665">
+  <properties />
+  
+  
+            <testcase name="loginIntoGmail" time="9,546" classname="tests.GmailTest" />
+                <testcase name="sendEmailToOneself" time="4,270" classname="tests.GmailTest" />
+                <testcase name="deleteEmail" time="3,849" classname="tests.GmailTest" />
+      
+</testsuite>
